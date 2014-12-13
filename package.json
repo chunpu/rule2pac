@@ -1,11 +1,12 @@
 {
   "name": "rule2pac",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "auto proxy rule => pac file",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
+  "repository": "chunpu/rule2pac",
   "scripts": {
     "test": "node test/convert-gfw.js > test/_gfw && node demo.js > test/test.pac.js && node pac-file-test.js test/test.pac.js"
   },
