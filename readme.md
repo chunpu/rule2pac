@@ -21,6 +21,8 @@ var convert = require('rule2pac')
 var pacScript = convert(rules) // rule is string
 ```
 
+Generated pacScript [e.g.](https://github.com/chunpu/rule2pac/blob/gh-pages/test/test.pac.js)
+
 Benchmark & Coverage
 ---
 
