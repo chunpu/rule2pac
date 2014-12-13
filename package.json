@@ -1,0 +1,14 @@
+{
+  "name": "rule2pac",
+  "version": "1.0.2",
+  "description": "auto proxy rule => pac file",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/convert-gfw.js > test/_gfw && node demo.js > test/test.pac.js && node pac-file-test.js test/test.pac.js"
+  },
+  "author": "ft",
+  "license": "ISC"
+}
