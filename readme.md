@@ -23,10 +23,20 @@ var pacScript = convert(rules) // rule is string
 
 Generated pacScript [e.g.](https://github.com/chunpu/rule2pac/blob/gh-pages/test/test.pac.js)
 
+use opt.precheck to define simpel precheck rule
+
+```js
+var pacScript = convert(rules, {
+    precheck: 'google twitter youtube'
+})
+```
+
+Pac script will precheck if host contains one of this before check out the rules
+
 Benchmark & Coverage
 ---
 
-You can test you pac script by using
+Test your pac script's benchmark and coverage by using
 
 ```sh
 node pac-file-test.js /tmp/test.pac

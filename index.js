@@ -1,6 +1,7 @@
 module.exports = exports = convert
 
-function convert(rules) {
+function convert(rules, opt) {
+    opt = opt || {}
     rules = rules + ''
     var arr = rules
         .trim()
@@ -11,7 +12,7 @@ function convert(rules) {
             return x
         })
 
-    var ret = rule2pac(arr)
+    var ret = rule2pac(arr, opt)
     return ret
 }
 
@@ -23,9 +24,18 @@ function pacTemplate() {
     var direct = _direct + ' ' + _proxy
     
     var domains = "domains"
+    var precheck = "precheck".split(/\s+/)
+    var shouldPrecheck = !!precheck[0]
 
     function FindProxyForURL(url, host) {
         var pos = -1
+        if (shouldPrecheck) {
+            for (var i = 0; i < precheck.length; i++) {
+                if (-1 != host.indexOf(precheck[i])) {
+                    return proxy
+                }
+            }
+        }
         while (true) {
             if (!host) return direct
             if (domains.hasOwnProperty(host)) {
@@ -41,7 +51,7 @@ function pacTemplate() {
     }
 }
 
-function rule2pac(arr) {
+function rule2pac(arr, opt) {
     // uniq arr
     var hash = {}
     for (var i = 0; i < arr.length; i++) {
@@ -59,7 +69,10 @@ function rule2pac(arr) {
     template = template.map(function(x) {
         return x.substr(4)
     }).join('\n')
-    template = template.replace('"domains"', '{\n' + domains + '\n}')
+    var precheck = opt.precheck || ''
+    template = template
+        .replace('"precheck"', '"' + precheck + '"')
+        .replace('"domains"', '{\n' + domains + '\n}')
     return template
 }
 

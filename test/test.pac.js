@@ -2703,9 +2703,18 @@ var domains = {
     '174.142.105.153': true,
     '69.65.19.160': true
 }
+var precheck = "sex google twitter youtube".split(/\s+/)
+var shouldPrecheck = !!precheck[0]
 
 function FindProxyForURL(url, host) {
     var pos = -1
+    if (shouldPrecheck) {
+        for (var i = 0; i < precheck.length; i++) {
+            if (-1 != host.indexOf(precheck[i])) {
+                return proxy
+            }
+        }
+    }
     while (true) {
         if (!host) return direct
         if (domains.hasOwnProperty(host)) {

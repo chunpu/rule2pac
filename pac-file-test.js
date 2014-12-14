@@ -1,5 +1,5 @@
 var directCases = 'zhidao.baidu.com weibo.com zhihu.com bing.cn'.split(/\s+/)
-var proxyCases = 'google.com google.com.hk aaa.google.com aaa.chrome.google.com bbs.sexinsex.net t66y.com'.split(/\s+/)
+var proxyCases = 'google.com google.com.hk aaa.google.com aaa.chrome.google.com bbs.sexinsex.net t66y.com fonts.googleapis.com'.split(/\s+/)
 
 function test(jsstr) {
     eval(jsstr)
@@ -31,6 +31,7 @@ function test(jsstr) {
             console.log('direct ok')
         }
 
+        var i = 0
         proxyCases.map(function(host) {
             var ret = FindProxyForURL('http://' + host + '/', host)
             if (!ret || 0 == ret.trim().indexOf('DIRECT')) {
